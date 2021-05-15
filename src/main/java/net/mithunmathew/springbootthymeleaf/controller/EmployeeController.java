@@ -64,9 +64,19 @@ public class EmployeeController {
 		// get the concerned employee
 		Employee theEmployee = employeeService.findById(theId);
 		
-		// populate form using this received value
+		// pre-populate form using this received value
 		theModel.addAttribute("employee", theEmployee);
 		
 		return "employees/employee-form";
+	}
+	
+	@GetMapping("/delete")
+	public String delete(@RequestParam("employeeId") int theId) {
+		
+		// delete the employee
+		employeeService.deleteById(theId);
+		
+		// redirect to listing page
+		return "redirect:/employees/list";
 	}
 }
